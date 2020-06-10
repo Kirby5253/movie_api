@@ -130,10 +130,12 @@ app.get('/movies/:name', (req, res) => {
 	);
 });
 
+// Gets a list of all genres available
 app.get('/genres', (req, res) => {
 	res.json(movieGenres);
 });
 
+// Gets info on a specific genre
 app.get('/genres/:name', (req, res) => {
 	res.json(
 		genreList.find((genre) => {
@@ -142,10 +144,12 @@ app.get('/genres/:name', (req, res) => {
 	);
 });
 
+// Gets a list of all available directors
 app.get('/directors', (req, res) => {
 	res.json(movieDirectors);
 });
 
+// Gets data on a specific director
 app.get('/directors/:name', (req, res) => {
 	res.json(
 		directorList.find((director) => {
@@ -166,6 +170,11 @@ app.post('/Account', (req, res) => {
 		users.push(newUser);
 		res.status(201).send(newUser);
 	}
+});
+
+//Allow users to deregister their account
+app.delete('/Account', (req, res) => {
+	return;
 });
 
 app.listen(8080, () => {
