@@ -7,7 +7,7 @@ let movies = [
 		name: 'Iron Man',
 		description:
 			'Dead men tell no tales Sea Legs nipperkin topgallant sheet wherry bring a spring upon her cable take a caulk black jack landlubber or just lubber. Nelsons folly Brethren of the Coast bilged on her anchor weigh anchor coffer interloper gibbet rutters piracy pressgang. Grog scurvy topsail gaff marooned sutler stern boom Jolly Roger rum. Brig loot cog fire in the hole strike colors boom grapple hearties Corsair bucko.',
-		genre: [ 'action', 'superhero', 'war', 'adventure', 'science fiction' ],
+		genres: [ 'action', 'superhero', 'war', 'adventure', 'science fiction' ],
 		director: 'Jon Favreau',
 		image: '#'
 	},
@@ -15,7 +15,7 @@ let movies = [
 		name: 'Joker',
 		description:
 			'Dead men tell no tales Sea Legs nipperkin topgallant sheet wherry bring a spring upon her cable take a caulk black jack landlubber or just lubber. Nelsons folly Brethren of the Coast bilged on her anchor weigh anchor coffer interloper gibbet rutters piracy pressgang. Grog scurvy topsail gaff marooned sutler stern boom Jolly Roger rum. Brig loot cog fire in the hole strike colors boom grapple hearties Corsair bucko.',
-		genre: [ 'crime', 'drama', 'thriller' ],
+		genres: [ 'crime', 'drama', 'thriller' ],
 		director: 'Todd Phillips',
 		image: '#'
 	},
@@ -23,11 +23,26 @@ let movies = [
 		name: '1917',
 		description:
 			'Dead men tell no tales Sea Legs nipperkin topgallant sheet wherry bring a spring upon her cable take a caulk black jack landlubber or just lubber. Nelsons folly Brethren of the Coast bilged on her anchor weigh anchor coffer interloper gibbet rutters piracy pressgang. Grog scurvy topsail gaff marooned sutler stern boom Jolly Roger rum. Brig loot cog fire in the hole strike colors boom grapple hearties Corsair bucko.',
-		genre: [ 'war', 'drama' ],
+		genres: [ 'war', 'drama' ],
 		director: 'Sam Mendes',
 		image: '#'
 	}
 ];
+
+var movie_list = [];
+
+let movie_info = movies.forEach((element) => {
+	var movie_details = {
+		name: element.name,
+		desc: element.description,
+		genres: element.genres,
+		director: element.director,
+		image: element.image
+	};
+	movie_list.push(element);
+});
+
+let genre_list = [ movie_list.genres ];
 
 app.use(morgan('common'));
 
@@ -39,13 +54,25 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-	res.send('Welcome to myFlix!');
+	res.status(200).send('Welcome to myFlix!');
 });
 
 app.get('/movies', (req, res) => {
-	res.json(list_of_movies.json);
+	res.status(200).json(movie_list);
 });
 
-app.listen(5000, () => {
-	console.log(`App is listening on port 5000.`);
+app.get('/movies/:name', (req, res) => {
+	res.json(
+		movies.find((movie) => {
+			return movie.name == req.params.name;
+		})
+	);
+});
+
+app.get('/genres', (req, res) => {
+	res.json(genre_list);
+});
+
+app.listen(8080, () => {
+	console.log(`App is listening on port 8080.`);
 });
