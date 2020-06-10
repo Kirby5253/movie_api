@@ -1,7 +1,6 @@
 const express = require('express'),
 	morgan = require('morgan'),
-	bodyParser = require('body-parser'),
-	uuid = require('uuid');
+	bodyParser = require('body-parser');
 
 const app = express();
 
@@ -108,9 +107,6 @@ let directorList = [
 	{ director_name: 'Sam Mendes', movies_directed: '1917' }
 ];
 
-// List of current users
-let users = [];
-
 // Welcome page for API
 app.get('/', (req, res) => {
 	res.status(200).send('Welcome to myFlix!');
@@ -158,23 +154,65 @@ app.get('/directors/:name', (req, res) => {
 	);
 });
 
+// List of current users
+let users = [
+	{
+		name: '',
+		username: '',
+		password: '',
+		email: '',
+		dob: ''
+	}
+];
+
 // Adds data for a new user
 app.post('/Account', (req, res) => {
 	let newUser = req.body;
 
-	if (!newUser.name || !newUser.userName || !newUser.password) {
+	if (!newUser.name) {
 		const message = 'Missing info in request body';
 		res.status(400).send(message);
 	} else {
-		newUser.id = uuid.v4();
 		users.push(newUser);
 		res.status(201).send(newUser);
 	}
 });
 
-//Allow users to deregister their account
-app.delete('/Account', (req, res) => {
-	return;
+// Allows details to be viewed of a user by email
+app.get('/Account/:username', (req, res) => {
+	res.json(
+		users.find((user) => {
+			return user.username === req.params.username;
+		})
+	);
+});
+
+// Allow users to update their account info
+app.put('/Account/:username/edit', (req, res) => {
+	let user = users.find((user) => {
+		return user.username === req.params.username;
+	});
+
+	if (user) {
+		user[req.params.username] = req.params.username;
+		res.status(201).send('User information was update: ' + user);
+	} else {
+		res.status(404).send('User with the name ' + req.params.name + ' was not found.');
+	}
+});
+
+// Allow users to delete their account
+app.delete('/Account/:username', (req, res) => {
+	let user = users.find((user) => {
+		return user.username === req.params.username;
+	});
+
+	if (user) {
+		users = users.filter((obj) => {
+			return obj.username !== req.params.username;
+		});
+		res.status(201).send('User ' + user.name + ' was deleted.');
+	}
 });
 
 app.listen(8080, () => {
