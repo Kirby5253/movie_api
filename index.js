@@ -194,8 +194,7 @@ app.put('/Account/:username/edit', (req, res) => {
 	});
 
 	if (user) {
-		user[req.params.username] = req.params.username;
-		res.status(201).send('User information was update: ' + user);
+		res.status(201).send('User information was updated: ' + user);
 	} else {
 		res.status(404).send('User with the name ' + req.params.name + ' was not found.');
 	}
@@ -212,6 +211,36 @@ app.delete('/Account/:username', (req, res) => {
 			return obj.username !== req.params.username;
 		});
 		res.status(201).send('User ' + user.name + ' was deleted.');
+	}
+});
+
+// Create favorites array
+let favorites = [];
+
+// Allow users to add to favorites
+app.post('/movies/favorites/:name', (req, res) => {
+	let movie = movieArray.movies.find((movie) => {
+		return movie.name === req.params.name;
+	});
+
+	if (movie) {
+		res.status(201).send(movie.name + ' was added to favorites!');
+		favorites.push(movie.name);
+	} else {
+		res.status(404).send('Movie with the name ' + req.params.name + ' was not found.');
+	}
+});
+
+app.delete('/movies/favorites/:name', (req, res) => {
+	let movie = movieArray.movies.find((movie) => {
+		return movie.name === req.params.name;
+	});
+
+	if (movie) {
+		res.status(201).send(movie.name + ' was removed from favorites.');
+		favorites.pop(movie.name);
+	} else {
+		res.status(404).send('Movie with the name ' + req.params.name + ' was not found.');
 	}
 });
 
