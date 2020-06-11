@@ -55,56 +55,56 @@ for (let i = 0; i < movieTitles.length; i++) {
 }
 
 for (let i = 0; i < movieTitles.length; i++) {
-	if (movieGenres.indexOf(movieTitles[i]['genres']) === -1) {
-		movieGenres.push(movieTitles[i]['genres']);
-	}
-}
-
-for (let i = 0; i < movieTitles.length; i++) {
 	movieDirectors.push(movieTitles[i].director);
 }
 
 // List of unique genres and descriptions
 let genreList = [
 	{
-		name: 'war',
+		genre_name: 'war',
 		desc: 'humans fighting'
 	},
 	{
-		name: 'drama',
+		genre_name: 'drama',
 		desc: 'people who are sad'
 	},
 	{
-		name: 'thriller',
+		genre_name: 'thriller',
 		desc: 'scary stuff'
 	},
 	{
-		name: 'crime',
+		genre_name: 'crime',
 		desc: 'people who are bad'
 	},
 	{
-		name: 'action',
+		genre_name: 'action',
 		desc: 'people doing exciting things'
 	},
 	{
-		name: 'superhero',
+		genre_name: 'superhero',
 		desc: 'good people'
 	},
 	{
-		name: 'adventure',
+		genre_name: 'adventure',
 		desc: 'people who do things and go places'
 	},
 	{
-		name: 'science fiction',
+		genre_name: 'science fiction',
 		desc: 'science experiments gone wrong'
 	}
 ];
 
+for (let i = 0; i < genreList.length; i++) {
+	if (movieGenres.indexOf(genreList[i]['genre_name']) === -1) {
+		movieGenres.push(genreList[i]['genre_name']);
+	}
+}
+
 // List of unique director details
 let directorList = [
-	{ director_name: 'Jon Favreau', movies_directed: 'Iron Man' },
-	{ director_name: 'Todd Phillips', movies_directed: 'Joker' },
-	{ director_name: 'Sam Mendes', movies_directed: '1917' }
+	{ director_name: 'Jon Favreau', movies_directed: 'Iron Man', birthday: 'October 19, 1996' },
+	{ director_name: 'Todd Phillips', movies_directed: 'Joker', birthday: 'December 20, 1970' },
+	{ director_name: 'Sam Mendes', movies_directed: '1917', birthday: 'August 1, 1965' }
 ];
 
 // Welcome page for API
@@ -135,7 +135,7 @@ app.get('/genres', (req, res) => {
 app.get('/genres/:name', (req, res) => {
 	res.json(
 		genreList.find((genre) => {
-			return genre.name === req.params.name;
+			return genre.genre_name === req.params.name;
 		})
 	);
 });
@@ -231,6 +231,7 @@ app.post('/movies/favorites/:name', (req, res) => {
 	}
 });
 
+// Allow users to delete a movie from favorites
 app.delete('/movies/favorites/:name', (req, res) => {
 	let movie = movieArray.movies.find((movie) => {
 		return movie.name === req.params.name;
