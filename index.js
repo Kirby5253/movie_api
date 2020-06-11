@@ -102,9 +102,9 @@ for (let i = 0; i < genreList.length; i++) {
 
 // List of unique director details
 let directorList = [
-	{ director_name: 'Jon Favreau', movies_directed: 'Iron Man', birthday: 'October 19, 1996' },
-	{ director_name: 'Todd Phillips', movies_directed: 'Joker', birthday: 'December 20, 1970' },
-	{ director_name: 'Sam Mendes', movies_directed: '1917', birthday: 'August 1, 1965' }
+	{ director_name: 'Jon Favreau', movies_directed: 'Iron Man', birth_date: 'October 19, 1996' },
+	{ director_name: 'Todd Phillips', movies_directed: 'Joker', birth_date: 'December 20, 1970' },
+	{ director_name: 'Sam Mendes', movies_directed: '1917', birth_date: 'August 1, 1965' }
 ];
 
 // Welcome page for API

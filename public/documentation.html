@@ -24,7 +24,7 @@
 <body>
   <p>This is an API that will distribute the information about movies I've seen.</p>
 
-  <table style="width:100%">
+  <table>
     <tr>
       <th>Request</th>
       <th>URL</th>
@@ -33,46 +33,136 @@
       <th>Response body data format</th>
     </tr>
     <tr>
-      <td>Jill</td>
-      <td>Smith</td>
-      <td>50</td>
-      <td>50</td>
-      <td>50</td>
+      <td>Welcome Screen for myFlix</td>
+      <td>/</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>Text with a Welcome message</td>
     </tr>
     <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-      <td>50</td>
-      <td>50</td>
+      <td>Get all movies by title</td>
+      <td>/movies</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON holding a list of each movie title</td>
     </tr>
     <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-      <td>50</td>
-      <td>50</td>
+      <td>Get movie details</td>
+      <td>/movies/[name]</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON holding details about a movie containing name, movie description, related genres, director, and image. Example:<br>
+        <span style="color: blue;">{<br>
+          name: 'Joker',<br><br>
+          description:'Dead men tell no tales Sea Legs nipperkin topgallant sheet wherry bring a spring upon her cable take a caulk black jack landlubber or just lubber. Nelsons folly Brethren of the Coast bilged on her anchor weigh anchor coffer interloper gibbet rutters piracy pressgang. Grog scurvy topsail gaff marooned sutler stern boom Jolly Roger rum. Brig loot cog fire in the hole strike colors boom grapple hearties Corsair bucko.',<br><br>
+          genres: [ 'crime', 'drama', 'thriller' ],<br><br>
+          director: 'Todd Phillips',<br><br>
+          image: '#'<br><br>
+          }</span></td>
     </tr>
     <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-      <td>50</td>
-      <td>50</td>
+      <td>Get all genres by title</td>
+      <td>/genres</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON holding a list of each movie genre</td>
     </tr>
     <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-      <td>50</td>
-      <td>50</td>
+      <td>Get genre details</td>
+      <td>/genres/[genre_name]</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON holding details about a movie genre containing name, and genre description. Example:<br>
+        <span style="color: blue;">{<br>
+          genre_name: 'thriller',<br>
+          description:"scary stuff",<br>
+          }</span></td>
     </tr>
     <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-      <td>50</td>
-      <td>50</td>
+      <td>Get a list of directors by name</td>
+      <td>/directors</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON holding a list of each movie director</td>
+    </tr>
+    <tr>
+      <td>Get director details</td>
+      <td>/directors/[director_name]</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON holding details about a movie director containing name, movies directed, and birth date. Example:<br>
+        <span style="color: blue;">{<br>
+          director_name: 'Jon Favreau',<br>
+          movies_directed: 'Iron Man',<br>
+          birth_date: 'October 19, 1996'<br>
+          }</span></td>
+    </tr>
+    <tr>
+      <td>Create a new user account</td>
+      <td>/Account</td>
+      <td>POST</td>
+      <td>A JSON with the name, username, password, email, and dob structured like:<br>
+        <span style="color: blue;">{<br>
+          name: 'Jake Kirby',<br>
+          username: 'example-username',<br>
+          password: '1234'<br>
+          email: 'kirby_jake@aol.com'<br>
+          dob: 'July 12, 1919'<br>
+          }</span>
+      </td>
+      <td>A JSON object holding data
+        about the user that was
+        added:<br>
+        <span style="color: blue;">{<br>
+          name: 'Jake Kirby',<br>
+          username: 'example-username',<br>
+          password: '1234'<br>
+          email: 'kirby_jake@aol.com'<br>
+          dob: 'July 12, 1919'<br>
+          }</span>
+      </td>
+    </tr>
+    <tr>
+      <td>Get account details</td>
+      <td>/Account/[username]</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON holding details about a user account containing name, username, password, email, and dob structured like:<br>
+        <span style="color: blue;">{<br>
+          name: 'Jake Kirby',<br>
+          username: 'example-username',<br>
+          password: '1234'<br>
+          email: 'kirby_jake@aol.com'<br>
+          dob: 'July 12, 1919'<br>
+          }</span></td>
+    </tr>
+    <tr>
+      <td>Delete user account</td>
+      <td>/Account/[username]</td>
+      <td>DELETE</td>
+      <td>None</td>
+      <td>A text message stating that the user account was deleted.</td>
+    </tr>
+    <tr>
+      <td>Edit user account</td>
+      <td>/Account/[username]/edit</td>
+      <td>PUT</td>
+      <td>None</td>
+      <td>A text message stating that the user account was updated.</td>
+    </tr>
+    <tr>
+      <td>Add movie to favorites</td>
+      <td>/movies/favorites/[name]</td>
+      <td>POST</td>
+      <td>None</td>
+      <td>A text message stating that the movie was added to favorites.</td>
+    </tr>
+    <tr>
+      <td>Remove movie from favorites</td>
+      <td>/movies/favorites/[name]</td>
+      <td>DELETE</td>
+      <td>None</td>
+      <td>A text message stating that the movie was removed from favorites.</td>
     </tr>
   </table>
 
