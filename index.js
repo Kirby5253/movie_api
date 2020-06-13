@@ -18,26 +18,34 @@ app.use((err, req, res, next) => {
 let movieArray = {
 	movies: [
 		{
-			name: 'Iron Man',
+			title: 'Iron Man',
 			description:
 				'Dead men tell no tales Sea Legs nipperkin topgallant sheet wherry bring a spring upon her cable take a caulk black jack landlubber or just lubber. Nelsons folly Brethren of the Coast bilged on her anchor weigh anchor coffer interloper gibbet rutters piracy pressgang. Grog scurvy topsail gaff marooned sutler stern boom Jolly Roger rum. Brig loot cog fire in the hole strike colors boom grapple hearties Corsair bucko.',
-			genres: [ 'action', 'superhero', 'war', 'adventure', 'science fiction' ],
-			director: 'Jon Favreau',
-			image: '#'
+			genres: {
+				name: 'Science Fiction',
+				description: 'A movie that exploits science that is not accepted by mainstream articles'
+			},
+			director: {
+				name: 'Jon Favreau',
+				bio: 'American actor, director, producer',
+				birth: '1965'
+			},
+			image: '#',
+			actors: [ 'Robert Downey Jr', 'Jon Favreau', 'Gwyneth Paltrow' ]
 		},
 		{
-			name: 'Joker',
+			title: 'Joker',
 			description:
 				'Dead men tell no tales Sea Legs nipperkin topgallant sheet wherry bring a spring upon her cable take a caulk black jack landlubber or just lubber. Nelsons folly Brethren of the Coast bilged on her anchor weigh anchor coffer interloper gibbet rutters piracy pressgang. Grog scurvy topsail gaff marooned sutler stern boom Jolly Roger rum. Brig loot cog fire in the hole strike colors boom grapple hearties Corsair bucko.',
-			genres: [ 'crime', 'drama', 'thriller' ],
+			genre: 'crime',
 			director: 'Todd Phillips',
 			image: '#'
 		},
 		{
-			name: '1917',
+			title: '1917',
 			description:
 				'Dead men tell no tales Sea Legs nipperkin topgallant sheet wherry bring a spring upon her cable take a caulk black jack landlubber or just lubber. Nelsons folly Brethren of the Coast bilged on her anchor weigh anchor coffer interloper gibbet rutters piracy pressgang. Grog scurvy topsail gaff marooned sutler stern boom Jolly Roger rum. Brig loot cog fire in the hole strike colors boom grapple hearties Corsair bucko.',
-			genres: [ 'war', 'drama' ],
+			genre: 'war',
 			director: 'Sam Mendes',
 			image: '#'
 		}
@@ -51,7 +59,7 @@ var movieDirectors = [];
 // Pulls out only the title of the available movies
 let movieTitles = movieArray['movies'];
 for (let i = 0; i < movieTitles.length; i++) {
-	movieTitleArray.push(movieTitles[i].name);
+	movieTitleArray.push(movieTitles[i].title);
 }
 
 for (let i = 0; i < movieTitles.length; i++) {
@@ -102,9 +110,24 @@ for (let i = 0; i < genreList.length; i++) {
 
 // List of unique director details
 let directorList = [
-	{ director_name: 'Jon Favreau', movies_directed: 'Iron Man', birth_date: 'October 19, 1996' },
-	{ director_name: 'Todd Phillips', movies_directed: 'Joker', birth_date: 'December 20, 1970' },
-	{ director_name: 'Sam Mendes', movies_directed: '1917', birth_date: 'August 1, 1965' }
+	{
+		director_name: 'Jon Favreau',
+		movies_directed: 'Iron Man',
+		birth_date: 'October 19, 1996',
+		bio: 'American director'
+	},
+	{
+		director_name: 'Todd Phillips',
+		movies_directed: 'Joker',
+		birth_date: 'December 20, 1970',
+		bio: 'American director'
+	},
+	{
+		director_name: 'Sam Mendes',
+		movies_directed: '1917',
+		birth_date: 'August 1, 1965',
+		bio: 'American Director'
+	}
 ];
 
 // Welcome page for API
@@ -118,10 +141,10 @@ app.get('/movies', (req, res) => {
 });
 
 // Returns data on a specific movie
-app.get('/movies/:name', (req, res) => {
+app.get('/movies/:title', (req, res) => {
 	res.json(
 		movieArray.movies.find((movie) => {
-			return movie.name == req.params.name;
+			return movie.title == req.params.title;
 		})
 	);
 });
@@ -218,30 +241,30 @@ app.delete('/Account/:username', (req, res) => {
 let favorites = [];
 
 // Allow users to add to favorites
-app.post('/movies/favorites/:name', (req, res) => {
+app.post('/Account/favorites/:title', (req, res) => {
 	let movie = movieArray.movies.find((movie) => {
-		return movie.name === req.params.name;
+		return movie.title === req.params.title;
 	});
 
 	if (movie) {
-		res.status(201).send(movie.name + ' was added to favorites!');
-		favorites.push(movie.name);
+		res.status(201).send(movie.title + ' was added to favorites!');
+		favorites.push(movie.title);
 	} else {
-		res.status(404).send('Movie with the name ' + req.params.name + ' was not found.');
+		res.status(404).send('Movie with the name ' + req.params.title + ' was not found.');
 	}
 });
 
 // Allow users to delete a movie from favorites
-app.delete('/movies/favorites/:name', (req, res) => {
+app.delete('/Account/favorites/:title', (req, res) => {
 	let movie = movieArray.movies.find((movie) => {
-		return movie.name === req.params.name;
+		return movie.title === req.params.title;
 	});
 
 	if (movie) {
-		res.status(201).send(movie.name + ' was removed from favorites.');
-		favorites.pop(movie.name);
+		res.status(201).send(movie.title + ' was removed from favorites.');
+		favorites.pop(movie.title);
 	} else {
-		res.status(404).send('Movie with the name ' + req.params.name + ' was not found.');
+		res.status(404).send('Movie with the name ' + req.params.title + ' was not found.');
 	}
 });
 
