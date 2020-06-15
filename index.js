@@ -37,17 +37,33 @@ let movieArray = {
 			title: 'Joker',
 			description:
 				'Dead men tell no tales Sea Legs nipperkin topgallant sheet wherry bring a spring upon her cable take a caulk black jack landlubber or just lubber. Nelsons folly Brethren of the Coast bilged on her anchor weigh anchor coffer interloper gibbet rutters piracy pressgang. Grog scurvy topsail gaff marooned sutler stern boom Jolly Roger rum. Brig loot cog fire in the hole strike colors boom grapple hearties Corsair bucko.',
-			genre: 'crime',
-			director: 'Todd Phillips',
-			image: '#'
+			genre: {
+				name: 'crime',
+				description: 'people who are bad'
+			},
+			director: {
+				name: 'Todd Phillips',
+				bio: 'American director',
+				birth: '1960'
+			},
+			image: '#',
+			actors: [ 'Jaoquin Phoenix', 'Robert DeNiro' ]
 		},
 		{
 			title: '1917',
 			description:
 				'Dead men tell no tales Sea Legs nipperkin topgallant sheet wherry bring a spring upon her cable take a caulk black jack landlubber or just lubber. Nelsons folly Brethren of the Coast bilged on her anchor weigh anchor coffer interloper gibbet rutters piracy pressgang. Grog scurvy topsail gaff marooned sutler stern boom Jolly Roger rum. Brig loot cog fire in the hole strike colors boom grapple hearties Corsair bucko.',
-			genre: 'war',
-			director: 'Sam Mendes',
-			image: '#'
+			genre: {
+				name: 'war',
+				description: 'humans fighting'
+			},
+			director: {
+				name: 'Sam Mendes',
+				bio: 'American director.',
+				birth: '1965'
+			},
+			image: '#',
+			actors: [ 'George MacKay', 'Richard Madden' ]
 		}
 	]
 };
