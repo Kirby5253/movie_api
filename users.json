@@ -1,4 +1,7 @@
 {"_id":{"$oid":"5ee3d33810d26f9d9e736e71"},"Name":"Jacob Kirby","Username":"kirby-jake","Password":"1234ideclareathumbwar","Email":"kirby_jake@yahoo.com","Birth_Date":"1991-07-12","Favorite_Movies":["ObjectId(\"5ee3ba9febd72a15cf02a299\")","ObjectId(\"5ee3bc8aebd72a15cf02a29c\")","ObjectId(\"5ee3bec2ebd72a15cf02a2a1\")"]}
+
 {"_id":{"$oid":"5ee3d3b34e23c628c882d847"},"Name":"Allison Kirby","Username":"kirby-allison","Password":"1234ideclareathumbwar","Email":"arochier33@yahoo.com","Birth_Date":"1996-06-10   ","Favorite_Movies":["ObjectId(\"5ee3bec2ebd72a15cf02a2a1\")","ObjectId(\"5ee3bc8aebd72a15cf02a29c\")"]}
+
 {"_id":{"$oid":"5ee3d3d74e23c628c882d848"},"Name":"Mikaela Kirby","Username":"kirby-mikaela","Password":"1234ideclareathumbwar","Email":"mikkirby@yahoo.com","Birth_Date":"1999-10-24   ","Favorite_Movies":["ObjectId(\"5ee3bec2ebd72a15cf02a2a1\")"]}
+
 {"_id":{"$oid":"5ee3df554e23c628c882d849"},"Name":"Kim Kirby","Username":"kirby-kim","Password":"1234ideclareathumbwar","Email":"kimkirby@yahoo.com","Birth_Date":"1967-08-24","Favorite_Movies":["ObjectId(\"5ee3bec2ebd72a15cf02a2a1\")",{"$oid":"5ee3bf5eebd72a15cf02a2a3"}]}

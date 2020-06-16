@@ -97,14 +97,14 @@
     </tr>
     <tr>
       <td>Get director details</td>
-      <td>/directors/[director_name]</td>
+      <td>/directors/[Name]</td>
       <td>GET</td>
       <td>None</td>
       <td>A JSON holding details about a movie director containing name, movies directed, and birth date. Example:<br>
         <span style="color: blue;">{<br>
-          director_name: 'Jon Favreau',<br>
-          movies_directed: 'Iron Man',<br>
-          birth_date: 'October 19, 1996'<br>
+          "Name": "Jon Favreau",<br>
+          "Bio": "American actor, director, producer, and screenwriter.",<br>
+          "Birth": "1965"<br>
           }</span></td>
     </tr>
     <tr>
@@ -113,22 +113,29 @@
       <td>POST</td>
       <td>A JSON with the username, password, email, and dob structured like:<br>
         <span style="color: blue;">{<br>
-          Username: "example-username",<br>
-          Password: "1234"<br>
-          Email: "kirby_jake@aol.com"<br>
-          Birth_date: "1991-07-12"<br>
+          "Username": "example-username",<br>
+          "Password": "1234"<br>
+          "Email": "kirby_jake@gmail.com"<br>
+          "Birth_date": "1991-07-12"<br>
           }</span>
       </td>
       <td>A JSON object holding data
         about the user that was
         added:<br>
         <span style="color: blue;">{<br>
-          Username: "example-username",<br>
-          Password: "1234"<br>
-          Email: "kirby_jake@aol.com"<br>
-          Birth_date: "1991-07-12"<br>
+          "Username": "example-username",<br>
+          "Password": "1234"<br>
+          "Email": "kirby_jake@gmail.com"<br>
+          "Birth_date": "1991-07-12"<br>
           }</span>
       </td>
+    </tr>
+    <tr>
+      <td>Get a list of all users</td>
+      <td>/users</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON holding a list of each user with their corresponding information.</td>
     </tr>
     <tr>
       <td>Get account details</td>
@@ -137,11 +144,10 @@
       <td>None</td>
       <td>A JSON holding details about a user account containing name, username, password, email, and dob structured like:<br>
         <span style="color: blue;">{<br>
-          name: 'Jake Kirby',<br>
-          username: 'example-username',<br>
-          password: '1234'<br>
-          email: 'kirby_jake@aol.com'<br>
-          dob: 'July 12, 1919'<br>
+          "Username": "example-username",<br>
+          "Password": "1234"<br>
+          "Email": "kirby_jake@gmail.com"<br>
+          "Birth_Date": "July 12, 1919"<br>
           }</span></td>
     </tr>
     <tr>
@@ -155,22 +161,29 @@
       <td>Edit user account</td>
       <td>/users/[Username]</td>
       <td>PUT</td>
-      <td>None</td>
-      <td>A text message stating that the user account was updated.</td>
+      <td>A JSON with all of the updated and current information structured like:<br>
+        <span style="color: blue;">{<br>
+          "Username": "updated-username",<br>
+          "Password": "newpassword"<br>
+          "Email": "kirby_jake@newgmail.com"<br>
+          "Birth_date": "1991-07-12"<br>
+          }</span>
+      </td>
+      <td>A JSON of the updated user account.</td>
     </tr>
     <tr>
       <td>Add movie to favorites</td>
       <td>/users/:Username/Movies/:MovieID</td>
       <td>POST</td>
       <td>None</td>
-      <td>A text message stating that the movie was added to favorites.</td>
+      <td>A JSON of the updated user account.</td>
     </tr>
     <tr>
       <td>Remove movie from favorites</td>
       <td>/users/:Username/Movies/:MovieID</td>
-      <td>DELETE</td>
+      <td>PUT</td>
       <td>None</td>
-      <td>A text message stating that the movie was removed from favorites.</td>
+      <td>A JSON of the updated user account.</td>
     </tr>
   </table>
 

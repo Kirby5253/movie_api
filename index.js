@@ -77,28 +77,27 @@ app.get('/genres/:Name', (req, res) => {
 
 // Gets a list of all available directors
 app.get('/directors', (req, res) => {
-	res.json(movieDirectors);
+	Movies.find({}, function(err, data) {
+		let directors = data.map((movie) => {
+			return movie.Director.Name;
+		});
+		let set = new Set(directors);
+		let directorList = [ ...set ];
+		res.json(directorList);
+	});
 });
 
 // Gets data on a specific director
-app.get('/directors/:name', (req, res) => {
-	res.json(
-		directorList.find((director) => {
-			return director.director_name === req.params.name;
+app.get('/directors/:Name', (req, res) => {
+	Movies.findOne({ 'Director.Name': req.params.Name })
+		.then((movie) => {
+			res.json(movie.Director);
 		})
-	);
+		.catch((err) => {
+			console.error(err);
+			res.status(500).send('Error: ' + err);
+		});
 });
-
-// List of current users
-let users = [
-	{
-		name: '',
-		username: '',
-		password: '',
-		email: '',
-		dob: ''
-	}
-];
 
 //Add a user
 /* We’ll expect JSON in this format
@@ -179,7 +178,7 @@ app.put('/users/:Username', (req, res) => {
 				Username: req.body.Username,
 				Password: req.body.Password,
 				Email: req.body.Email,
-				Birthday: req.body.Birthday
+				Birth_Date: req.body.Birth_Date
 			}
 		},
 		{ new: true }, //This line makes sure that the updated document is returned
@@ -210,15 +209,12 @@ app.delete('/users/:Username', (req, res) => {
 		});
 });
 
-// Create favorites array
-let favorites = [];
-
 // Allow users to add to favorites
 app.post('/users/:Username/Movies/:MovieID', (req, res) => {
 	Users.findOneAndUpdate(
 		{ Username: req.params.Username },
 		{
-			$push: { FavoriteMovies: req.params.MovieID }
+			$push: { Favorite_Movies: req.params.MovieID }
 		},
 		{ new: true }, // This line makes sure that the updated document is returned
 		(err, updatedUser) => {
@@ -232,18 +228,23 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
 	);
 });
 
-// Allow users to delete a movie from favorites
-app.delete('/Account/favorites/:title', (req, res) => {
-	let movie = movieArray.movies.find((movie) => {
-		return movie.title === req.params.title;
-	});
-
-	if (movie) {
-		res.status(201).send(movie.title + ' was removed from favorites.');
-		favorites.pop(movie.title);
-	} else {
-		res.status(404).send('Movie with the name ' + req.params.title + ' was not found.');
-	}
+// Allow users to remove a movie from favorites
+app.put('/users/:Username/Movies/:MovieID', (req, res) => {
+	Users.findOneAndUpdate(
+		{ Username: req.params.Username },
+		{
+			$pull: { Favorite_Movies: req.params.MovieID }
+		},
+		{ new: true }, // This line makes sure that the updated document is returned
+		(err, updatedUser) => {
+			if (err) {
+				console.error(err);
+				res.status(500).send('Error: ' + err);
+			} else {
+				res.json(updatedUser);
+			}
+		}
+	);
 });
 
 app.listen(8080, () => {
