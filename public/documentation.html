@@ -44,28 +44,30 @@
       <td>/movies</td>
       <td>GET</td>
       <td>None</td>
-      <td>A JSON holding a list of each movie title</td>
+      <td>A JSON holding a list of each movie title currently in the database.</td>
     </tr>
     <tr>
       <td>Get movie details</td>
-      <td>/movies/[title]</td>
+      <td>/movies/[Title]</td>
       <td>GET</td>
       <td>None</td>
-      <td>A JSON holding details about a movie containing name, movie description, related genres, director, and image. Example:<br>
+      <td>A JSON holding details about a movie containing the title, movie description, related genre(name and description), director(name and bio), image, actors, and unique id. Example:<br>
         <span style="color: blue;">{<br>
-          title: 'Joker',<br><br>
-          description:'Crazy clown likes to laugh creepy and kill people.',<br><br>
-          genre:{<br>
-          <span style="margin-left: 40px;">name: 'crime'</span><br>
-          <span style="margin-left: 40px;">description:'people doing bad things'</span><br>
-          }<br><br>
-          director: {<br>
-          <span style="margin-left: 40px;">name: 'Todd Phillips',</span><br>
-          <span style="margin-left: 40px;">bio: 'American director and screenwriter'</span><br>
-          <span style="margin-left: 40px;">birth: '1965'</span><br>
-          }<br><br>
-          image: 'joker.png',<br><br>
-          actors: ['Jaoquin Phoenix', 'Robert DeNiro']<br>
+          _id: "5ee3ba9febd72a15cf02a299",<br><br>
+          Title: "Iron Man",<br><br>
+          Description:"A billionaire weapons maker is kidnapped and has to force his way out of imprisonment by designing a super suit that leads him to becoming a superhero in his own way.",<br><br>
+          Genre:{<br>
+          <span style="margin-left: 40px;">Name: "Science Fiction"</span><br>
+          <span style="margin-left: 40px;">Description: "Science fiction uses fictional-based displays of phenomena not fully accepted by main-steam scientists."</span><br>
+          },<br><br>
+          Director: {<br>
+          <span style="margin-left: 40px;">Name: "Jon Favreau",</span><br>
+          <span style="margin-left: 40px;">Bio: "American actor, director, producer, and screenwriter."</span><br>
+          <span style="margin-left: 40px;">Birth: "1966"</span><br>
+          },<br><br>
+          ImagePath: "ironman.png",<br><br>
+          Actors: ["Robert Downey Jr.", "Jon Favreau", "Gwyneth Paltrow", "Terrence Howard"],<br><br>
+          Featured: true<br>
           }</span></td>
     </tr>
     <tr>
@@ -73,17 +75,17 @@
       <td>/genres</td>
       <td>GET</td>
       <td>None</td>
-      <td>A JSON holding a list of each movie genre</td>
+      <td>A JSON holding a list of each unique movie genre</td>
     </tr>
     <tr>
       <td>Get genre details</td>
-      <td>/genres/[genre_name]</td>
+      <td>/genres/[Name]</td>
       <td>GET</td>
       <td>None</td>
-      <td>A JSON holding details about a movie genre containing name, and genre description. Example:<br>
+      <td>A JSON holding details about a movie genre containing the name, and genre description. Example:<br>
         <span style="color: blue;">{<br>
-          genre_name: 'thriller',<br>
-          description:"scary stuff",<br>
+          <span style="margin-left: 40px;">Name: "Action",</span><br>
+          <span style="margin-left: 40px;">Description: "Action films generally involve violence, fighting, and physical activities."</span><br>
           }</span></td>
     </tr>
     <tr>
@@ -107,32 +109,30 @@
     </tr>
     <tr>
       <td>Create a new user account</td>
-      <td>/Account</td>
+      <td>/users</td>
       <td>POST</td>
-      <td>A JSON with the name, username, password, email, and dob structured like:<br>
+      <td>A JSON with the username, password, email, and dob structured like:<br>
         <span style="color: blue;">{<br>
-          name: 'Jake Kirby',<br>
-          username: 'example-username',<br>
-          password: '1234'<br>
-          email: 'kirby_jake@aol.com'<br>
-          dob: 'July 12, 1919'<br>
+          Username: "example-username",<br>
+          Password: "1234"<br>
+          Email: "kirby_jake@aol.com"<br>
+          Birth_date: "1991-07-12"<br>
           }</span>
       </td>
       <td>A JSON object holding data
         about the user that was
         added:<br>
         <span style="color: blue;">{<br>
-          name: 'Jake Kirby',<br>
-          username: 'example-username',<br>
-          password: '1234'<br>
-          email: 'kirby_jake@aol.com'<br>
-          dob: 'July 12, 1919'<br>
+          Username: "example-username",<br>
+          Password: "1234"<br>
+          Email: "kirby_jake@aol.com"<br>
+          Birth_date: "1991-07-12"<br>
           }</span>
       </td>
     </tr>
     <tr>
       <td>Get account details</td>
-      <td>/Account/[username]</td>
+      <td>/users/[Username]</td>
       <td>GET</td>
       <td>None</td>
       <td>A JSON holding details about a user account containing name, username, password, email, and dob structured like:<br>
@@ -146,28 +146,28 @@
     </tr>
     <tr>
       <td>Delete user account</td>
-      <td>/Account/[username]</td>
+      <td>/users/[username]</td>
       <td>DELETE</td>
       <td>None</td>
       <td>A text message stating that the user account was deleted.</td>
     </tr>
     <tr>
       <td>Edit user account</td>
-      <td>/Account/[username]/edit</td>
+      <td>/users/[Username]</td>
       <td>PUT</td>
       <td>None</td>
       <td>A text message stating that the user account was updated.</td>
     </tr>
     <tr>
       <td>Add movie to favorites</td>
-      <td>/Account/favorites/[title]</td>
+      <td>/users/:Username/Movies/:MovieID</td>
       <td>POST</td>
       <td>None</td>
       <td>A text message stating that the movie was added to favorites.</td>
     </tr>
     <tr>
       <td>Remove movie from favorites</td>
-      <td>/Account/favorites/[title]</td>
+      <td>/users/:Username/Movies/:MovieID</td>
       <td>DELETE</td>
       <td>None</td>
       <td>A text message stating that the movie was removed from favorites.</td>

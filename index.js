@@ -10,7 +10,7 @@ const Users = Models.User;
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/myFlixDbB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(morgan('common'));
 
@@ -23,168 +23,56 @@ app.use((err, req, res, next) => {
 	res.status(500).send('Something broke!');
 });
 
-let movieArray = {
-	movies: [
-		{
-			title: 'Iron Man',
-			description:
-				'Dead men tell no tales Sea Legs nipperkin topgallant sheet wherry bring a spring upon her cable take a caulk black jack landlubber or just lubber. Nelsons folly Brethren of the Coast bilged on her anchor weigh anchor coffer interloper gibbet rutters piracy pressgang. Grog scurvy topsail gaff marooned sutler stern boom Jolly Roger rum. Brig loot cog fire in the hole strike colors boom grapple hearties Corsair bucko.',
-			genres: {
-				name: 'Science Fiction',
-				description: 'A movie that exploits science that is not accepted by mainstream articles'
-			},
-			director: {
-				name: 'Jon Favreau',
-				bio: 'American actor, director, producer',
-				birth: '1965'
-			},
-			image: '#',
-			actors: [ 'Robert Downey Jr', 'Jon Favreau', 'Gwyneth Paltrow' ]
-		},
-		{
-			title: 'Joker',
-			description:
-				'Dead men tell no tales Sea Legs nipperkin topgallant sheet wherry bring a spring upon her cable take a caulk black jack landlubber or just lubber. Nelsons folly Brethren of the Coast bilged on her anchor weigh anchor coffer interloper gibbet rutters piracy pressgang. Grog scurvy topsail gaff marooned sutler stern boom Jolly Roger rum. Brig loot cog fire in the hole strike colors boom grapple hearties Corsair bucko.',
-			genre: {
-				name: 'crime',
-				description: 'people who are bad'
-			},
-			director: {
-				name: 'Todd Phillips',
-				bio: 'American director',
-				birth: '1960'
-			},
-			image: '#',
-			actors: [ 'Jaoquin Phoenix', 'Robert DeNiro' ]
-		},
-		{
-			title: '1917',
-			description:
-				'Dead men tell no tales Sea Legs nipperkin topgallant sheet wherry bring a spring upon her cable take a caulk black jack landlubber or just lubber. Nelsons folly Brethren of the Coast bilged on her anchor weigh anchor coffer interloper gibbet rutters piracy pressgang. Grog scurvy topsail gaff marooned sutler stern boom Jolly Roger rum. Brig loot cog fire in the hole strike colors boom grapple hearties Corsair bucko.',
-			genre: {
-				name: 'war',
-				description: 'humans fighting'
-			},
-			director: {
-				name: 'Sam Mendes',
-				bio: 'American director.',
-				birth: '1965'
-			},
-			image: '#',
-			actors: [ 'George MacKay', 'Richard Madden' ]
-		}
-	]
-};
-
-var movieTitleArray = [];
-var movieGenres = [];
-var movieDirectors = [];
-
-// Pulls out only the title of the available movies
-let movieTitles = movieArray['movies'];
-for (let i = 0; i < movieTitles.length; i++) {
-	movieTitleArray.push(movieTitles[i].title);
-}
-
-for (let i = 0; i < movieTitles.length; i++) {
-	movieDirectors.push(movieTitles[i].director);
-}
-
-// List of unique genres and descriptions
-let genreList = [
-	{
-		genre_name: 'war',
-		desc: 'humans fighting'
-	},
-	{
-		genre_name: 'drama',
-		desc: 'people who are sad'
-	},
-	{
-		genre_name: 'thriller',
-		desc: 'scary stuff'
-	},
-	{
-		genre_name: 'crime',
-		desc: 'people who are bad'
-	},
-	{
-		genre_name: 'action',
-		desc: 'people doing exciting things'
-	},
-	{
-		genre_name: 'superhero',
-		desc: 'good people'
-	},
-	{
-		genre_name: 'adventure',
-		desc: 'people who do things and go places'
-	},
-	{
-		genre_name: 'science fiction',
-		desc: 'science experiments gone wrong'
-	}
-];
-
-for (let i = 0; i < genreList.length; i++) {
-	if (movieGenres.indexOf(genreList[i]['genre_name']) === -1) {
-		movieGenres.push(genreList[i]['genre_name']);
-	}
-}
-
-// List of unique director details
-let directorList = [
-	{
-		director_name: 'Jon Favreau',
-		movies_directed: 'Iron Man',
-		birth_date: 'October 19, 1996',
-		bio: 'American director'
-	},
-	{
-		director_name: 'Todd Phillips',
-		movies_directed: 'Joker',
-		birth_date: 'December 20, 1970',
-		bio: 'American director'
-	},
-	{
-		director_name: 'Sam Mendes',
-		movies_directed: '1917',
-		birth_date: 'August 1, 1965',
-		bio: 'American Director'
-	}
-];
-
 // Welcome page for API
 app.get('/', (req, res) => {
 	res.status(200).send('Welcome to myFlix!');
 });
 
 // Returns a list of all available movies
+
 app.get('/movies', (req, res) => {
-	res.status(200).json(movieTitleArray);
+	Movies.find({}, function(err, data) {
+		let titles = data.map((movie) => {
+			return movie.Title;
+		});
+		res.json(titles);
+	});
 });
 
 // Returns data on a specific movie
-app.get('/movies/:title', (req, res) => {
-	res.json(
-		movieArray.movies.find((movie) => {
-			return movie.title == req.params.title;
+app.get('/movies/:Title', (req, res) => {
+	Movies.findOne({ Title: req.params.Title })
+		.then((movie) => {
+			res.json(movie);
 		})
-	);
+		.catch((err) => {
+			console.error(err);
+			res.status(500).send('Error: ' + err);
+		});
 });
 
-// Gets a list of all genres available
+// Returns a list of unique genres
 app.get('/genres', (req, res) => {
-	res.json(movieGenres);
+	Movies.find({}, function(err, data) {
+		let genres = data.map((movie) => {
+			return movie.Genre.Name;
+		});
+		let set = new Set(genres);
+		let genreList = [ ...set ];
+		res.json(genreList);
+	});
 });
 
 // Gets info on a specific genre
-app.get('/genres/:name', (req, res) => {
-	res.json(
-		genreList.find((genre) => {
-			return genre.genre_name === req.params.name;
+app.get('/genres/:Name', (req, res) => {
+	Movies.findOne({ 'Genre.Name': req.params.Name })
+		.then((movie) => {
+			res.json(movie.Genre);
 		})
-	);
+		.catch((err) => {
+			console.error(err);
+			res.status(500).send('Error: ' + err);
+		});
 });
 
 // Gets a list of all available directors
