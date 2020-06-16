@@ -116,7 +116,7 @@
           "Username": "example-username",<br>
           "Password": "1234"<br>
           "Email": "kirby_jake@gmail.com"<br>
-          "Birth_date": "1991-07-12"<br>
+          "Birth_Date": "1991-07-12"<br>
           }</span>
       </td>
       <td>A JSON object holding data
@@ -124,9 +124,10 @@
         added:<br>
         <span style="color: blue;">{<br>
           "Username": "example-username",<br>
-          "Password": "1234"<br>
-          "Email": "kirby_jake@gmail.com"<br>
-          "Birth_date": "1991-07-12"<br>
+          "Password": "1234",<br>
+          "Email": "kirby_jake@gmail.com",<br>
+          "Birth_Date": "1991-07-12",<br>
+          "Favorite_Movies": []
           }</span>
       </td>
     </tr>
@@ -145,14 +146,16 @@
       <td>A JSON holding details about a user account containing name, username, password, email, and dob structured like:<br>
         <span style="color: blue;">{<br>
           "Username": "example-username",<br>
-          "Password": "1234"<br>
-          "Email": "kirby_jake@gmail.com"<br>
-          "Birth_Date": "July 12, 1919"<br>
-          }</span></td>
+          "Password": "1234",<br>
+          "Email": "kirby_jake@gmail.com",<br>
+          "Birth_Date": "1991-07-12",<br>
+          "Favorite_Movies": []
+          }</span>
+      </td>
     </tr>
     <tr>
       <td>Delete user account</td>
-      <td>/users/[username]</td>
+      <td>/users/[Username]</td>
       <td>DELETE</td>
       <td>None</td>
       <td>A text message stating that the user account was deleted.</td>
@@ -164,26 +167,49 @@
       <td>A JSON with all of the updated and current information structured like:<br>
         <span style="color: blue;">{<br>
           "Username": "updated-username",<br>
-          "Password": "newpassword"<br>
-          "Email": "kirby_jake@newgmail.com"<br>
-          "Birth_date": "1991-07-12"<br>
+          "Password": "newpassword",<br>
+          "Email": "kirby_jake@newgmail.com",<br>
+          "Birth_Date": "1991-07-12",<br>
           }</span>
       </td>
-      <td>A JSON of the updated user account.</td>
+      <td>A JSON of the updated user account:<br>
+        <span style="color: blue;">{<br>
+          "Username": "updated-username",<br>
+          "Password": "newpassword",<br>
+          "Email": "kirby_jake@newgmail.com",<br>
+          "Birth_Date": "1991-07-12",<br>
+          "Favorite_Movies": []<br>
+          }</span>
+      </td>
     </tr>
     <tr>
       <td>Add movie to favorites</td>
-      <td>/users/:Username/Movies/:MovieID</td>
+      <td>/users/[Username]/Movies/[MovieID]</td>
       <td>POST</td>
       <td>None</td>
-      <td>A JSON of the updated user account.</td>
+      <td>A JSON of the updated user account with the newly added favorite movie.<br>
+        <span style="color: blue;">{<br>
+          "Username": "updated-username",<br>
+          "Password": "newpassword",<br>
+          "Email": "kirby_jake@newgmail.com",<br>
+          "Birth_Date": "1991-07-12",<br>
+          "Favorite_Movies": [ "5ee3bec2ebd72a15cf02a2a1"]<br>
+          }</span>
+      </td>
     </tr>
     <tr>
       <td>Remove movie from favorites</td>
-      <td>/users/:Username/Movies/:MovieID</td>
+      <td>/users/[Username]/Movies/[MovieID]</td>
       <td>PUT</td>
       <td>None</td>
-      <td>A JSON of the updated user account.</td>
+      <td>A JSON of the updated user account without the removed favorite movie.<br>
+        <span style="color: blue;">{<br>
+          "Username": "updated-username",<br>
+          "Password": "newpassword",<br>
+          "Email": "kirby_jake@newgmail.com",<br>
+          "Birth_Date": "1991-07-12",<br>
+          "Favorite_Movies": []<br>
+          }</span></td>
     </tr>
   </table>
 
