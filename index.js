@@ -25,7 +25,7 @@ app.use(morgan('common'));
 
 app.use(bodyParser.json());
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+let allowedOrigins = ['*'];
 
 app.use(cors({
 	origin: (origin, callback) => {
@@ -192,7 +192,7 @@ app.post('/users', [
 		})
 		.catch((err) => {
 			console.error(err);
-			res.status(500).semd('Error: ' + err);
+			res.status(500).send('Error: ' + err);
 		});
 });*/
 
