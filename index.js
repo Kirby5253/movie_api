@@ -68,6 +68,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) 
 	});
 });
 
+
 // Returns data on a specific movie
 app.get('/movies/:Title',passport.authenticate('jwt', { session: false }), (req, res) => {
 	Movies.findOne({ Title: req.params.Title })
