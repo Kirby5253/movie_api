@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 // Defines the schema for the movies database
 let movieSchema = mongoose.Schema({
@@ -25,6 +26,14 @@ let userSchema = mongoose.Schema({
 	Birth_Date: Date,
 	Favorite_Movies: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Movie' } ]
 });
+
+userSchema.statics.hashPassword = (password) => {
+	return bcrypt.hashSync(password, 10);
+};
+
+userSchema.methods.validatePassword = function(password) {
+	return bcrypt.compareSync(password, this.Password);
+};
 
 // Creates collections in the database
 let Movie = mongoose.model('Movie', movieSchema);
