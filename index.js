@@ -48,7 +48,7 @@ app.use((err, req, res, next) => {
 });
 
 // Welcome page for API
-app.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/',  (req, res) => {
 	res.status(200).send('Welcome to myFlix!');
 });
 
