@@ -35,12 +35,17 @@ app.get('/', (req, res) => {
 
 // Returns a list of all available movies
 
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Movies.find({}, function(err, data) {
 		let titles = data.map((movie) => {
 			return movie.Title;
 		});
-		res.json(titles);
+		if (err) {
+			console.error(err);
+			res.status(500).send('Error: ' + err);
+		} else {
+			res.json(titles);
+		}
 	});
 });
 
@@ -64,7 +69,12 @@ app.get('/genres', (req, res) => {
 		});
 		let set = new Set(genres);
 		let genreList = [ ...set ];
-		res.json(genreList);
+		if (err) {
+			console.error(err);
+			res.status(500).send('Error: ' + err);
+		} else {
+			res.json(genreList);
+		}
 	});
 });
 
