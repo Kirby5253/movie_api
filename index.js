@@ -137,11 +137,10 @@ app.get('/directors/:Name', passport.authenticate('jwt', { session: false }), (r
 //Add a user
 /* We’ll expect JSON in this format
 {
-  ID: Integer,
-  Username: String,
+  Username: String, at least 5 chars, only letters and numbers
   Password: String,
   Email: String,
-  Birth_Date: Date
+  Birth_Date: Date (YYYY-MM-DD)
 }*/
 app.post('/users', [
 	check('Username', 'Username is required').isLength({min: 5}),
