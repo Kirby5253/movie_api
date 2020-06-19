@@ -56,14 +56,11 @@ app.get('/',  (req, res) => {
 
 app.get('/movies', (req, res) => {
 	Movies.find({}, function(err, data) {
-		let titles = data.map((movie) => {
-			return movie.Title;
-		});
 		if (err) {
 			console.error(err);
 			res.status(500).send('Error: ' + err);
 		} else {
-			res.json(titles);
+			res.json(data);
 		}
 	});
 });
