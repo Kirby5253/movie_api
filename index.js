@@ -25,7 +25,7 @@ app.use(morgan('common'));
 
 app.use(bodyParser.json());
 
-let allowedOrigins = ['*'];
+let allowedOrigins = ['*','http://localhost:1234'];
 
 app.use(cors({
 	origin: (origin, callback) => {
