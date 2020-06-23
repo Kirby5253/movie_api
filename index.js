@@ -185,8 +185,8 @@ app.post(
 	}
 );
 
-// Get all users
-/*app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Users.find()
 		.then((users) => {
 			res.status(201).json(users);
@@ -195,7 +195,7 @@ app.post(
 			console.error(err);
 			res.status(500).send('Error: ' + err);
 		});
-});*/
+});
 
 // Allows details to be viewed of a user by username
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
