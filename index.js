@@ -25,14 +25,18 @@ app.use(morgan('common'));
 
 app.use(bodyParser.json());
 
-let allowedOrigins = ['*','http://localhost:1234'];
+let allowedOrigins = [ '*', 'http://localhost:1234' ];
 
-app.use(cors({
-	origin: (origin, callback) => {
-		if(!origin) return callback(null, true);
-		if(allowedOrigins.indexOf(origin)=== -1){ //If a origin isn't on the list of allowed origins
-			let message = 'The CORS policy for this application doesn\'t allow access from origin ' + origin;
-			return callback(new Error(message ), false);
+app.use(
+	cors({
+		origin: (origin, callback) => {
+			if (!origin) return callback(null, true);
+			if (allowedOrigins.indexOf(origin) === -1) {
+				//If a origin isn't on the list of allowed origins
+				let message = "The CORS policy for this application doesn't allow access from origin " + origin;
+				return callback(new Error(message), false);
+			}
+			return callback(null, true);
 		}
 		return callback(null, true);
 	}
@@ -54,7 +58,7 @@ app.get('/',  (req, res) => {
 
 // Returns a list of all available movies
 
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Movies.find({}, function(err, data) {
 		if (err) {
 			console.error(err);
