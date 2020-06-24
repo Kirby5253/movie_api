@@ -139,7 +139,7 @@ app.get('/directors/:Name', passport.authenticate('jwt', { session: false }), (r
   Username: String, at least 5 chars, only letters and numbers
   Password: String,
   Email: String,
-  Birth_Date: Date (YYYY-MM-DD)
+  Birthday: Date (YYYY-MM-DD)
 }*/
 app.post(
 	'/users',
@@ -184,7 +184,6 @@ app.post(
 			});
 	}
 );
-
 
 app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Users.find()
@@ -237,7 +236,7 @@ app.put(
 					Username: req.body.Username,
 					Password: req.body.Password,
 					Email: req.body.Email,
-					Birth_Date: req.body.Birth_Date
+					Birthday: req.body.Birthday
 				}
 			},
 			{ new: true }, //This line makes sure that the updated document is returned
