@@ -50,7 +50,7 @@ export function LoginView(props) {
 		<div className="login-form">
 			<Form className>
 				<Form.Label>
-					<h3>Login to MyFlix</h3>
+					<h3 className="login-title">Login to MyFlix</h3>
 				</Form.Label>
 				<Form.Group controlId="formBasicUsername">
 					<Form.Label>Username:</Form.Label>
@@ -77,8 +77,8 @@ export function LoginView(props) {
 					Login
 				</Button>
 				<Link to={`/register`}>
-					<Button variant="dark" className="login-button" type="button">
-						Create Account
+					<Button variant="link" className="login-button" type="button">
+						New to MyFlix? Click here to create an account
 					</Button>
 				</Link>
 				<br />

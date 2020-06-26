@@ -46,7 +46,7 @@ export function RegistrationView(props) {
 		<div className="login-form">
 			<Form className="register-form">
 				<Form.Label>
-					<h3>Create New User for MyFlix</h3>
+					<h3 className="login-title">Create New User</h3>
 				</Form.Label>
 
 				<Form.Group controlId="formBasicUsername">
@@ -91,10 +91,10 @@ export function RegistrationView(props) {
 					/>
 				</Form.Group>
 
-				<Button variant="dark" type="button" onClick={handleRegistrationSubmit}>
+				<Button className="login-button" variant="dark" type="button" onClick={handleRegistrationSubmit}>
 					Register
 				</Button>
-				<Button variant="link" type="button" onClick={cancelRegistration}>
+				<Button className="login-button" variant="link" type="button" onClick={cancelRegistration}>
 					Already a user? Click here to sign in.
 				</Button>
 			</Form>
