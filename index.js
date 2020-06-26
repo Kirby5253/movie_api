@@ -48,9 +48,7 @@ let auth = require('./auth')(app);
 
 app.use(express.static('public'));
 
-// app.use('/client', express.static(path.join(__dirname, 'client', 'dist')));
-
-app.use('/client', express.static(path.join(__dirname, '../', 'client', 'myflix_client',  'dist')));
+app.use('/client', express.static(path.join(__dirname, 'client', 'dist')));
 
 app.use('/log', express.static(path.join(__dirname, 'log.txt')));
 
