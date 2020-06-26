@@ -51,7 +51,7 @@ app.use('/client', express.static(path.join(__dirname, 'client', 'dist')));
 
 app.use((err, req, res, next) => {
 	console.error(err.stack);
-	res.status(500).send('Something broke!');
+	res.status(500).send('Something broke!'.err);
 });
 
 // Welcome page for API
