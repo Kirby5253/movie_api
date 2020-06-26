@@ -17,7 +17,7 @@ const app = express();
 
 const { check, validationResult } = require('express-validator');
 
-const path = require("path");
+const path = require('path');
 
 /*mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });*/
 
@@ -27,7 +27,7 @@ app.use(morgan('common'));
 
 app.use(bodyParser.json());
 
-let allowedOrigins = [ '*', 'http://localhost:1234' ];
+let allowedOrigins = [ '*', 'http://localhost:1234', 'https://myflixdb5253.herokuapp.com/' ];
 
 app.use(
 	cors({
@@ -47,7 +47,7 @@ let auth = require('./auth')(app);
 
 app.use(express.static('public'));
 
-app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+app.use('/client', express.static(path.join(__dirname, 'client', 'dist')));
 
 app.use((err, req, res, next) => {
 	console.error(err.stack);
