@@ -12,6 +12,7 @@ const Users = Models.User;
 
 const passport = require('passport');
 require('./passport');
+require('dotenv').config()
 
 const app = express();
 
@@ -21,11 +22,7 @@ const path = require('path');
 
 /*mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });*/
 
-try {
-	mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-} catch (err) {
-	console.error(err);
-}
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(morgan('dev'));
 
@@ -52,6 +49,8 @@ let auth = require('./auth')(app);
 app.use(express.static('public'));
 
 app.use('/client', express.static(path.join(__dirname, 'client', 'dist')));
+
+app.use('/log', express.static(path.join(__dirname, 'log.txt')));
 
 app.get('/client/*', (req, res) => {
 	res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
