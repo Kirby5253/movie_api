@@ -56,7 +56,6 @@ export function LoginView(props) {
 				<Button variant="dark" className="login-button" type="button" onClick={handleSubmit}>
 					Login
 				</Button>
-				{/* This currently has the same functionality as the submit button */}
 				<Link to={`/register`}>
 					<Button variant="dark" className="login-button" type="button">
 						Create Account
