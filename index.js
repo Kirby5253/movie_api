@@ -23,8 +23,8 @@ const path = require('path');
 
 try {
 	mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-} catch (error) {
-	handleError(error);
+} catch (err) {
+	console.error(err);
 }
 
 app.use(morgan('dev'));
