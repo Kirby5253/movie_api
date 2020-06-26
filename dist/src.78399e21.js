@@ -51224,7 +51224,9 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
         src: movie.ImagePath
       })), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, {
         className: "movie-title"
-      }, movie.Title), _react.default.createElement(_reactBootstrap.Card.Text, null, movie.Description), _react.default.createElement(_reactRouterDom.Link, {
+      }, movie.Title), _react.default.createElement(_reactBootstrap.Card.Text, {
+        className: "card-text"
+      }, movie.Description), _react.default.createElement(_reactRouterDom.Link, {
         to: "/movies/".concat(movie._id)
       }, _react.default.createElement(_reactBootstrap.Button, {
         className: "more-details"
@@ -51663,7 +51665,7 @@ function RegistrationView(props) {
 
       alert('User ' + newUsername + ' was successfully created. Please login with your new username and password.');
     }).catch(function (e) {
-      console.log('error registering the user');
+      console.log('error registering the user', e);
     });
   };
 
@@ -52866,7 +52868,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61152" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59001" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
