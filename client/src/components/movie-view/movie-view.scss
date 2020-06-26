@@ -1,0 +1,42 @@
+.movie-view {
+	margin: 20px;
+	align-content: center;
+}
+
+.movie-poster {
+	float: left;
+	width: 50%;
+	margin-right: 15px;
+}
+
+.label {
+	font-weight: bold;
+}
+
+.link {
+	text-decoration: underline;
+}
+
+.link:hover {
+	color: white;
+	text-decoration: none;
+	background-color: #343a40;
+}
+
+div {
+	align-content: center;
+}
+
+.movie-title {
+	font-size: 25px;
+	margin-bottom: 10px;
+}
+
+.movie-description,
+.movie-actors {
+	margin-bottom: 10px;
+}
+
+.movie-button {
+	margin-bottom: 10px;
+}

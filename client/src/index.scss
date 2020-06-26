@@ -1,0 +1,13 @@
+$color: steelblue;
+
+body {
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.my-flix {
+	color: $color;
+}
+
+.col {
+	display: flex;
+}
