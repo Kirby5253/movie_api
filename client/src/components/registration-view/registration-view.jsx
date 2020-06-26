@@ -13,34 +13,30 @@ export function RegistrationView(props) {
 
 	if (user) return null;
 
-	try {
-		const handleRegistrationSubmit = (e) => {
-			e.preventDefault();
-			/* Send a request to the server for authentication */
-			axios
-				.post('https://myflixdb5253.herokuapp.com/users', {
-					Username: newUsername,
-					Password: newPassword,
-					Email: newEmail,
-					Birthday: newBirthDate
-				})
-				.then((response) => {
-					const data = response.data;
-					console.log(data);
-					window.open('/client', '_self'); // Self to open in the current window
-					alert(
-						'User ' +
-							newUsername +
-							' was successfully created. Please login with your new username and password.'
-					);
-				})
-				.catch((e) => {
-					console.log('error registering the user', e);
-				});
-		};
-	} catch (ex) {
-		console.error(ex);
-	}
+	const handleRegistrationSubmit = (e) => {
+		e.preventDefault();
+		/* Send a request to the server for authentication */
+		axios
+			.post('https://myflixdb5253.herokuapp.com/users', {
+				Username: newUsername,
+				Password: newPassword,
+				Email: newEmail,
+				Birthday: newBirthDate
+			})
+			.then((response) => {
+				const data = response.data;
+				console.log(data);
+				window.open('/client', '_self'); // Self to open in the current window
+				alert(
+					'User ' +
+						newUsername +
+						' was successfully created. Please login with your new username and password.'
+				);
+			})
+			.catch((e) => {
+				console.log('error registering the user', e);
+			});
+	};
 
 	const cancelRegistration = () => {
 		window.open('/client', '_self');
