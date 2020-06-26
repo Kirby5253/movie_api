@@ -23,19 +23,19 @@ const path = require('path');
 
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-app.use(morgan('common'));
+app.use(morgan('dev'));
 
 app.use(bodyParser.json());
 
-let allowedOrigins = [ '*', 'http://localhost:1234' ];
+let allowedOrigins = [ '*', 'http://localhost:8080', 'https://myflixdb5253.herokuapp.com/client/' ];
 
 app.use(
 	cors({
 		origin: (origin, callback) => {
 			if (!origin) return callback(null, true);
 			if (allowedOrigins.indexOf(origin) === -1) {
-				//If a origin isn't on the list of allowed origins
-				let message = "The CORS policy for this application doesn't allow access from origin " + origin;
+				// If a specific origin isn’t found on the list of allowed origins
+				let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
 				return callback(new Error(message), false);
 			}
 			return callback(null, true);
@@ -315,7 +315,7 @@ app.put('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', { sessi
 	);
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 1234;
 app.listen(port, '0.0.0.0', () => {
 	console.log('Listening on Port ' + port);
 });
