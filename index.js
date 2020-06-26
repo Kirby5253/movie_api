@@ -49,6 +49,10 @@ app.use(express.static('public'));
 
 app.use('/client', express.static(path.join(__dirname, 'client', 'dist')));
 
+app.get('/client/*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+
 app.use((err, req, res, next) => {
 	console.error(err.stack);
 	res.status(500).send('Something broke!', JSON.stringify(err));
@@ -61,7 +65,7 @@ app.get('/', (req, res) => {
 
 // Returns a list of all available movies
 
-app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/movies', (req, res) => {
 	Movies.find({}, function(err, data) {
 		if (err) {
 			console.error(err);
