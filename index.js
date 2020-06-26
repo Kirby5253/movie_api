@@ -27,7 +27,7 @@ app.use(morgan('common'));
 
 app.use(bodyParser.json());
 
-let allowedOrigins = [ '*', 'http://localhost:1234', 'https://myflixdb5253.herokuapp.com/' ];
+let allowedOrigins = [ '*', 'http://localhost:1234' ];
 
 app.use(
 	cors({
