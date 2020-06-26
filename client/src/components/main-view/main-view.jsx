@@ -106,15 +106,15 @@ class MainView extends React.Component {
 				this.state.user ? (
 					<div className="navbar">
 						<Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
-							<Navbar.Brand href="/">
+							<Navbar.Brand href="/client/">
 								<h1>MyFlix</h1>
 							</Navbar.Brand>
 							<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 							<Navbar.Collapse id="responsive-navbar-nav">
 								<Nav className="mr-auto">
-									<Nav.Link href="/">Movies</Nav.Link>
-									<Nav.Link href={`/profile/${user}`}>Account</Nav.Link>
-									<Nav.Link onClick={(user) => this.logoutUser()} href="http://localhost:1234/">
+									<Nav.Link href="/client/">Movies</Nav.Link>
+									<Nav.Link href={`/client/profile/${user}`}>Account</Nav.Link>
+									<Nav.Link onClick={(user) => this.logoutUser()} href="/client/">
 										Logout
 									</Nav.Link>
 								</Nav>
