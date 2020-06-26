@@ -282,21 +282,25 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 
 // Allow users to add to favorites
 app.post('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
-	Users.findOneAndUpdate(
-		{ Username: req.params.Username },
-		{
-			$push: { Favorite_Movies: req.params.MovieID }
-		},
-		{ new: true }, // This line makes sure that the updated document is returned
-		(err, updatedUser) => {
-			if (err) {
-				console.error(err);
-				res.status(500).send('Error: ' + err);
-			} else {
-				res.json(updatedUser);
+	try {
+		Users.findOneAndUpdate(
+			{ Username: req.params.Username },
+			{
+				$push: { Favorite_Movies: req.params.MovieID }
+			},
+			{ new: true }, // This line makes sure that the updated document is returned
+			(err, updatedUser) => {
+				if (err) {
+					console.error(err);
+					res.status(500).send('Error: ' + err);
+				} else {
+					res.json(updatedUser);
+				}
 			}
-		}
-	);
+		);
+	} catch(err){
+		console.error(err);
+	}
 });
 
 // Allow users to remove a movie from favorites
