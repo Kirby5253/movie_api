@@ -28,7 +28,7 @@ app.use(morgan('dev'));
 
 app.use(bodyParser.json());
 
-let allowedOrigins = [ '*', 'http://localhost:8080', 'https://myflixdb5253.herokuapp.com/client/' ];
+let allowedOrigins = [ '*', 'http://localhost:8080', 'https://myflixdb5253.herokuapp.com/client/','https://kirby-myflix.herokuapp.com/client/' ];
 
 app.use(
 	cors({
