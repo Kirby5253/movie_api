@@ -21,7 +21,15 @@ const path = require('path');
 
 /*mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });*/
 
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose
+	.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+	.catch((error) => handleError(error));
+
+try {
+	mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+} catch (error) {
+	handleError(error);
+}
 
 app.use(morgan('dev'));
 
@@ -315,7 +323,7 @@ app.put('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', { sessi
 	);
 });
 
-const port = process.env.PORT || 1234;
+const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {
 	console.log('Listening on Port ' + port);
 });
