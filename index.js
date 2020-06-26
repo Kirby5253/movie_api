@@ -47,11 +47,7 @@ let auth = require('./auth')(app);
 
 app.use(express.static('public'));
 
-app.use("../client/myflix_client", express.static(path.join(__dirname, "myflix_client", "dist")));
-
-app.get("../client/myflix_client/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "myflix_client", "dist", "index.html"));
-});
+app.use("/client", express.static(path.join(__dirname, "client", "dist")));
 
 app.use((err, req, res, next) => {
 	console.error(err.stack);
