@@ -79,6 +79,7 @@ export class MovieView extends React.Component {
 					Add to Favorites
 				</Button>
 				<br />
+
 				<Link to={`/`}>
 					<Button className="movie-button" variant="dark">
 						Back

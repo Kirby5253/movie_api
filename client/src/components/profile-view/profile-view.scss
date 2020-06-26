@@ -1,13 +1,18 @@
+.profile-view {
+	margin-top: 69px;
+}
+
 ul {
-  display: flex;
-  list-style: none;
+	display: flex;
+	list-style: none;
+	padding-left: 0;
 }
 
 li {
-  margin: 10px;
+	margin: 10px;
 }
 
 .profile-label {
-  font-size: 25px;
-  margin-bottom: 30px;
+	font-size: 25px;
+	margin-bottom: 30px;
 }

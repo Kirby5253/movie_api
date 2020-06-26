@@ -27,6 +27,25 @@ export function LoginView(props) {
 			});
 	};
 
+	// Allows user to push enter instead of clicking login
+	const handleSubmitEnter = (e) => {
+		if (event.key === 'Enter') {
+			/* Send a request to the server for authentication */
+			axios
+				.post('https://myflixdb5253.herokuapp.com/login', {
+					Username: username,
+					Password: password
+				})
+				.then((response) => {
+					const data = response.data;
+					props.onLoggedIn(data);
+				})
+				.catch((e) => {
+					console.log('no such user');
+				});
+		}
+	};
+
 	return (
 		<div className="login-form">
 			<Form className>
@@ -46,6 +65,7 @@ export function LoginView(props) {
 				<Form.Group controlId="formBasicPassword">
 					<Form.Label>Password</Form.Label>
 					<Form.Control
+						onKeyPress={handleSubmitEnter}
 						type="password"
 						placeholder="Password"
 						value={password}
